@@ -1,0 +1,45 @@
+<div class="editor-container">
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <select (change)="formatBlock($event)">
+      <option value="P">P</option>
+      <option value="H1">H1</option>
+      <option value="H2">H2</option>
+      <option value="H3">H3</option>
+    </select>
+    <button (click)="format('bold')" title="Bold"><span class="material-icons">format_bold</span></button>
+    <button (click)="format('italic')" title="Italic"><span class="material-icons">format_italic</span></button>
+    <button (click)="format('underline')" title="Underline"><span class="material-icons">format_underlined</span></button>
+    <button (click)="format('strikeThrough')" title="Strike"><span class="material-icons">strikethrough_s</span></button>
+    <button (click)="format('insertUnorderedList')" title="Bulleted list"><span class="material-icons">format_list_bulleted</span></button>
+    <button (click)="format('insertOrderedList')" title="Numbered list"><span class="material-icons">format_list_numbered</span></button>
+    <button (click)="format('justifyLeft')" title="Align left"><span class="material-icons">format_align_left</span></button>
+    <button (click)="format('justifyCenter')" title="Align center"><span class="material-icons">format_align_center</span></button>
+    <button (click)="format('justifyRight')" title="Align right"><span class="material-icons">format_align_right</span></button>
+    <button (click)="format('undo')" title="Undo"><span class="material-icons">undo</span></button>
+    <button (click)="format('redo')" title="Redo"><span class="material-icons">redo</span></button>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages">
+    <div *ngFor="let page of pages; let i = index"
+         class="page"
+         #page
+         contenteditable="true"
+         (input)="onInput($event, i)"
+         (paste)="onPaste($event, i)"
+         [attr.data-page]="i+1">
+    </div>
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="thumbnails">
+    <div *ngFor="let page of pages; let i = index"
+         class="thumb"
+         [class.active]="activePage === i+1"
+         (click)="scrollToPage(i)">
+      <div class="thumb-preview" [innerHTML]="pageContents[i]"></div>
+      <div class="thumb-label">Page {{ i+1 }}</div>
+    </div>
+  </div>
+</div>
