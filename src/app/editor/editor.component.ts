@@ -93,15 +93,6 @@ export class EditorComponent implements AfterViewInit {
     }
   }
 
-  private restoreCursor() {
-    const selection = window.getSelection();
-    const range = selection?.getRangeAt(0);
-    if (range && selection) {
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-  }
-
   scrollToPage(index: number) {
     this.activePage = index + 1;
     document
